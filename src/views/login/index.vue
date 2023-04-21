@@ -32,7 +32,7 @@
                     </el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="submitForm(loginFormRef)" round color="#626aef" class="w-[250px]">登 录</el-button>
+                    <el-button type="primary" @click="submitForm(loginFormRef)" round color="#626aef" class="w-[250px]" :loading="loading">登 录</el-button>
                 </el-form-item>
             </el-form>
 
@@ -41,36 +41,73 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue'
+import { reactive, ref, onMounted, onBeforeUnmount } from 'vue'
+import { loginApi } from '~/api/login/index.js'
+import { useRouter } from 'vue-router';
+import { setToken } from "~/utils/cookies"
+import { notification } from '~/utils/notification'
+import { useStore } from 'vuex'
 
-// do not use same name with ref
+const store = useStore()
+
+const router = useRouter()
+
 const loginForm = reactive({
-  username: '',
-  password: '',
+    username: '',
+    password: '',
 })
 
-
 const rules = {
-  username: [
-    { required: true, message: '用户名不能为空', trigger: 'blur' },
-  ],
-  password: [
-    { required: true, message: '密码不能为空', trigger: 'blur' },
-    { min: 6, message: '密码不少于6位', trigger: 'blur' },
-  ],
+    username: [
+        { required: true, message: '用户名不能为空', trigger: 'blur' },
+    ],
+    password: [
+        { required: true, message: '密码不能为空', trigger: 'blur' },
+        { min: 4, message: '密码不少于6位', trigger: 'blur' },
+    ],
 }
 
 //绑定验证窗体
- const loginFormRef = ref(null)
-
-const submitForm = () =>{
+const loginFormRef = ref(null)
+const loading = ref(false)
+const submitForm = () => {
     //验证结果
-    loginFormRef.value.validate((valid)=>{
-        console.log(valid)
+    loginFormRef.value.validate((valid) => {
+        if (!valid) {
+            return false
+        }
+        loading.value = true
+        loginApi(loginForm.username, loginForm.password).then(res => {
+            // 提示成功
+            notification('登陆成功', '用户登陆成功', 'success')
+            //存储token
+            setToken(res.token)
+            //获取用户信息
+            //由vuex自动获取用户数据，由前置守卫触发permission
+            //跳转到后台界面
+            router.push('/dashboard')
+
+        }).finally(() => {
+            loading.value = false
+        })
     })
 }
+// 监听回车事件
+function onKeyUp(e){
+    if(e.key == 'Enter'){
+        submitForm()
+    }
+}
 
-
+//添加监听事件
+//页面加载完成注册事件
+onMounted(()=>{
+    document.addEventListener("keyup",onKeyUp)
+})
+//移除键盘监听
+onBeforeUnmount(()=>{
+    document.removeEventListener("keyup",onKeyUp)
+})
 </script>
 <style scoped>
 .login-container{
