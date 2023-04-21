@@ -48,6 +48,7 @@ const handleCommand = (c) => {
         case "rePassword":
             break;
         default:
+        notification('错误提示', '操作方法不存在', 'error')
             break;
     }
 }
