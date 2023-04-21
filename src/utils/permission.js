@@ -17,7 +17,7 @@ router.beforeEach(async (to, from, next) => {
     //防止重复登陆的判断
     if(token && to.path == '/'){
         notification('重复登陆', '用户请勿重复登陆', 'warning', 2000)
-        return next({ path: from.path ? from.path : "/" })
+        return next({ path: from.path ? from.path : "/admin" })
     }
 
     // 如果用户登陆了，就自动获取用户信息，并存储在vuex
@@ -25,9 +25,9 @@ router.beforeEach(async (to, from, next) => {
        await store.dispatch("getinfo")
     }
     //设置页面标题
-    console.log(to.meta.titel);
-    let titel = (to.meta.titel ? to.meta.titel : "") + "-福佑家和后台演示系统"
-    document.title = titel
+    console.log(to.meta.title);
+    let title = (to.meta.title ? to.meta.title : "") + "-福佑家和后台演示系统"
+    document.title = title
     next()
 })
 

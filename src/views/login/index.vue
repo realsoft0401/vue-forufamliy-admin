@@ -85,7 +85,7 @@ const submitForm = () => {
             //获取用户信息
             //由vuex自动获取用户数据，由前置守卫触发permission
             //跳转到后台界面
-            router.push('/dashboard')
+            router.push('/admin/')
 
         }).finally(() => {
             loading.value = false
