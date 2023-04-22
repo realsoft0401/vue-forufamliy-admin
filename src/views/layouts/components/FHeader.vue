@@ -4,10 +4,19 @@
             <el-icon class="mr-2"><ElementPlus /></el-icon>
             福佑家和后台系统
         </span>
+
+        <el-tooltip class="box-item" effect="dark" content="折叠" placement="bottom">
         <el-icon class="icon-btn"><Fold /></el-icon>
-        <el-icon><Refresh /></el-icon>
+         </el-tooltip>
+
+        <el-tooltip class="box-item" effect="dark" content="刷新" placement="bottom"> 
+        <el-icon class="icon-btn" @click="handleRefresh"><Refresh /></el-icon>
+         </el-tooltip>
+
         <div class="ml-auto flex items-center">
-            <el-icon class="icon-btn"><FullScreen /></el-icon>
+            <el-tooltip class="box-item" effect="dark" content="全屏" placement="bottom">
+            <el-icon class="icon-btn" @click="toggle"> <FullScreen v-if="!isFullscreen"/><Aim v-else/> </el-icon> 
+            </el-tooltip>
 
             <el-dropdown class="dropdown" @command="handleCommand">
                 <span class="flex items-center text-light-50">
@@ -35,6 +44,9 @@ import { notification } from '~/utils/notification'
 import { useRouter } from 'vue-router'
 import { logOut } from '~/api/login'
 import { useStore } from 'vuex'
+import { useFullscreen } from '@vueuse/core'
+
+const { isFullscreen, toggle } = useFullscreen()
 
 const router = useRouter()
 
@@ -68,6 +80,11 @@ function handlelogout(){
        })
     })
 }
+
+function handleRefresh(){
+    location.reload()
+}
+
 </script>
 <style scoped>
 .f-head{
