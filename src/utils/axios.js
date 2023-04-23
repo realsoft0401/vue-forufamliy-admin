@@ -1,6 +1,9 @@
 import axios from 'axios'
 import { getToken } from '~/utils/cookies'
 import { notification } from '~/utils/notification'
+import { logOut } from '~/api/login'
+import store from "~/store"
+
 // import qs from "qs"
 const service = axios.create({
     baseURL: "/api",
@@ -27,7 +30,13 @@ service.interceptors.response.use(function (response) {
   // 对响应数据做点什么
   return response.data.data;
 }, function (error) {
-  notification('错误提示',error.response.data.msg || "服务器请求失败",'error')
+
+  const msg = error.response.data.msg || "服务器请求失败"
+
+  if(msg == "非法token，请先登录！"){
+    store.dispatch("logout").finally(()=>location.reload())
+  }
+  notification('错误提示', msg,'error')
   // 对响应错误做点什么
   return Promise.reject(error);
 });

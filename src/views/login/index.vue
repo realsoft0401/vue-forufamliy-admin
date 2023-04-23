@@ -42,9 +42,7 @@
 
 <script setup>
 import { reactive, ref, onMounted, onBeforeUnmount } from 'vue'
-import { loginApi } from '~/api/login/index.js'
 import { useRouter } from 'vue-router';
-import { setToken } from "~/utils/cookies"
 import { notification } from '~/utils/notification'
 import { useStore } from 'vuex'
 
@@ -77,17 +75,10 @@ const submitForm = () => {
             return false
         }
         loading.value = true
-        loginApi(loginForm.username, loginForm.password).then(res => {
-            // 提示成功
+        store.dispatch("login",loginForm).then(res=>{
             notification('登陆成功', '用户登陆成功', 'success')
-            //存储token
-            setToken(res.token)
-            //获取用户信息
-            //由vuex自动获取用户数据，由前置守卫触发permission
-            //跳转到后台界面
-            router.push('/admin/')
-
-        }).finally(() => {
+            router.push("/admin/")
+        }).finally(()=>{
             loading.value = false
         })
     })
