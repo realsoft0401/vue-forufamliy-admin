@@ -20,6 +20,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 
 import 'virtual:windi.css'
 
+//全局前守卫 和 全局后守卫
 import './utils/permission'
 
 import "nprogress/nprogress.css"
