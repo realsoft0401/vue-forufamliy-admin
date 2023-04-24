@@ -1,6 +1,6 @@
 import axios from "~/utils/axios"
 
-export async function loginApi(username, password){
+export async function login(username, password){
     const result =  await axios.post('/admin/login',{username, password})
     return result
 }

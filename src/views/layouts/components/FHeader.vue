@@ -6,7 +6,10 @@
         </span>
 
         <el-tooltip class="box-item" effect="dark" content="折叠" placement="bottom">
-        <el-icon class="icon-btn"><Fold /></el-icon>
+        <el-icon class="icon-btn" @click="$store.commit('handleAsideWith')">
+            <Fold v-if="$store.state.asideWith == '250px'"/>
+            <Expand v-else/>
+        </el-icon>
         </el-tooltip>
 
         <el-tooltip class="box-item" effect="dark" content="刷新" placement="bottom"> 
@@ -38,37 +41,6 @@
     </div>
 
     <!--修改密码部分样式-->
-    <!-- <el-drawer v-model="showdrawer" title="修改密码" size="45%" :close-on-click-modal="false">
-        <el-form :model="repasswordForm"  :rules="rules" ref="rePasswordRef" label-width="80px" size="small">
-            <el-form-item prop="oldpassword" label="旧密码">
-                <el-input v-model="repasswordForm.oldpassword" placeholder="请输入旧密码" show-password type="password">
-                    <template #prefix>
-                    <el-icon class="el-input__icon"><Lock /></el-icon>
-                    </template>
-                </el-input>
-            </el-form-item>
-
-            <el-form-item prop="password" label="新密码">
-                <el-input v-model="repasswordForm.password" placeholder="请输入新密码" show-password type="password">
-                    <template #prefix>
-                    <el-icon class="el-input__icon"><Lock /></el-icon>
-                    </template>
-                </el-input>
-            </el-form-item>
-
-            <el-form-item prop="repassword" label="确认密码">
-                <el-input v-model="repasswordForm.repassword" placeholder="请输入确认密码" show-password type="password">
-                    <template #prefix>
-                    <el-icon class="el-input__icon"><Lock /></el-icon>
-                    </template>
-                </el-input>
-            </el-form-item>
-
-            <el-form-item>
-                <el-button type="primary" @click="submitForm"  :loading="loading">提交</el-button>
-            </el-form-item>
-        </el-form>
-    </el-drawer> -->
     <form-drawer ref="FormDrawerRef" title="修改密码" destroyOnClose @submit="submitForm">
         <el-form :model="repasswordForm"  :rules="rules" ref="rePasswordRef" label-width="80px" size="small">
             
@@ -142,7 +114,7 @@ function handleRefresh(){
 
 
 </script>
-<style scoped>
+<style>
 .f-head{
     @apply flex bg-indigo-600 text-light-50 fixed top-0 left-0 right-0 items-center;
     height: 64px;

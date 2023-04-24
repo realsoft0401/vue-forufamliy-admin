@@ -60,7 +60,6 @@ export function useRepassword() {
 
     const openRePasswordForm = () =>{
         FormDrawerRef.value.open()
-        console.log("openRePasswordForm");
     }
 
     return {

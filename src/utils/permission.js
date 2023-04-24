@@ -17,7 +17,7 @@ router.beforeEach(async (to, from, next) => {
     //防止重复登陆的判断
     if(token && to.path == '/'){
         notification('重复登陆', '用户请勿重复登陆', 'warning', 2000)
-        return next({ path: from.path ? from.path : "/admin/" })
+        return next({ path: "/admin/" })
     }
 
     // 如果用户登陆了，就自动获取用户信息，并存储在vuex

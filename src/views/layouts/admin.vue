@@ -3,7 +3,7 @@
       <el-container>
         <el-header><f-header /></el-header>
         <el-container>
-          <el-aside><f-menu /></el-aside>
+          <el-aside :width="$store.state.asideWith"><f-menu /></el-aside>
           <el-container>
             <el-main>
                 <f-tag-list />
@@ -21,3 +21,8 @@ import FMenu from './components/FMenu.vue'
 import FTagList from './components/FTaglist.vue'
 </script>
   
+<style>
+.e-aside{
+  transition: all 0.2s;
+}
+</style>
