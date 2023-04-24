@@ -10,7 +10,7 @@
 
                     <el-menu-item  v-for="(subitem,subindex) in item.child" :key="subindex" :index="subitem.frontpath">
                         <el-icon><component :is="subitem.icon"></component></el-icon>
-                        <span>{{ item.name }}</span>
+                        <span>{{ subitem.name }}</span>
                     </el-menu-item>
 
                   </el-sub-menu>
@@ -58,5 +58,8 @@ const defaultActive = ref(route.path)
     overflow-y: auto;
     overflow-x: hidden;
     @apply shadow-md fixed bg-light-50;
+}
+.f-menu::-webkit-scrollbar{
+  width: 0px;
 }
 </style>
