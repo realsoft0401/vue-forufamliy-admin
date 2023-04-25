@@ -75,7 +75,7 @@
 import FormDrawer from '~/components/FormDrawer.vue'
 import { notification } from '~/utils/notification'
 import { useFullscreen } from '@vueuse/core'
-import { useRepassword, useLogout } from '~/views/layouts/components/components.js'
+import { useRepassword, useLogout } from '~/views/layouts/components/FHeader.js'
 
 const { isFullscreen, toggle } = useFullscreen()
 

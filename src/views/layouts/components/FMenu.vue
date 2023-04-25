@@ -39,7 +39,6 @@ const asideMenu = computed(() => store.state.menus)
 
 const handleSelect = (e)=>{
     router.push(e)
-    console.log(e);
 }
 
 //是否折叠

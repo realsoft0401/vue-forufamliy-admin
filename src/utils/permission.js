@@ -3,7 +3,10 @@ import { getToken } from "~/utils/cookies"
 import { notification } from '~/utils/notification'
 import store from "~/store";
 import { showFullLoading, hideFullLoading} from "~/utils/nprogress"
+
+
 //全局前置守卫
+let hasGetInfo =  false
 router.beforeEach(async (to, from, next) => {
     showFullLoading()
     // console.log("全局前置守卫")
@@ -22,8 +25,9 @@ router.beforeEach(async (to, from, next) => {
 
     // 如果用户登陆了，就自动获取用户信息，并存储在vuex
     let hasNewRoutes = false
-    if(token){
+    if(token && !hasGetInfo ){
       let { menus } = await store.dispatch("getinfo")
+      hasGetInfo = true
        //动态添加路由
        hasNewRoutes = addRoutes(menus)
 
