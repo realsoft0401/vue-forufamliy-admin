@@ -13,14 +13,14 @@ router.beforeEach(async (to, from, next) => {
     const token = getToken()
     //没有token 强制跳转登陆页面 但要排除登陆页
     if(!token && to.path != '/'){
-        notification('登陆信息缺失', '请先登陆再进入系统', 'error', 3000)
+        notification('登陆信息缺失', '请先登录再进入系统', 'error', 3000)
         return next({ path: '/' })
     }
 
     //防止重复登陆的判断
     if(token && to.path == '/'){
-        notification('重复登陆', '用户请勿重复登陆', 'warning', 2000)
-        return next({ path: "/admin/" })
+        notification('重复登陆', '您已经登录过了', 'warning', 2000)
+        return next({ path: "/dashboard/" })
     }
 
     // 如果用户登陆了，就自动获取用户信息，并存储在vuex

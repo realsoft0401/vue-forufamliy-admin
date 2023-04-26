@@ -7,15 +7,15 @@ import GoodsList from '~/views/goods/list.vue'
 import CategoryList from '~/views/category/list.vue'
 import DashBoard from '~/views/dashboard/index.vue'
 
-//默认路由
+//默认路由单独页面
 const routes = [
   { path: '/', component: Index, meta:{ title: '登陆' } },
-  { path: '/admin/', component: Admin, name: 'admin', meta:{ title: '系统首页' }},
+  { path: '/admin/', component: Admin, name: 'admin', meta:{ title: '首页' }},
   { path: '/about', component: About, meta:{ title: '关于' } },
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
 ]
 
-  //动态路由数组
+//动态路由数组 框架内页面
   const asyncRoutes = [
     { 
       path: '/dashboard/',
