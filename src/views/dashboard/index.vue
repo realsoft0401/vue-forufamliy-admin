@@ -53,6 +53,12 @@
         </el-row>
 
         <IndexNavs />
+
+        <el-row :gutter="20">
+          <el-col :span="12"><IndexChart /></el-col>
+          <el-col :span="12"></el-col>
+        </el-row>
+
     </div>
 </template>
 
@@ -60,6 +66,7 @@
 import { ref } from 'vue'
 // import CountTo from '~/components/CountTo.vue'
 import IndexNavs from '~/components/IndexNavs.vue'
+import IndexChart from '~/components/IndexChart.vue'
 import{ getStatisticsDB } from '~/api/dashboard/index.js'
 
     const panels = ref([])

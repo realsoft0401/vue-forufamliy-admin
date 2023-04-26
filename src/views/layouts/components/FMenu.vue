@@ -50,7 +50,7 @@ const defaultActive = ref(route.path)
 </script>
 <style>
 .f-menu {
-    transition: all 0.2s;
+    transition: all 0s;
     top: 64px;
     bottom: 0;
     left: 0;
