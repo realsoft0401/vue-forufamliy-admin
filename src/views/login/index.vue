@@ -32,7 +32,7 @@
                     </el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="submitForm()" round color="#626aef" class="w-[250px]" :loading="loading">登 录</el-button>
+                    <el-button type="primary" @click="submitForm" round color="#626aef" class="w-[250px]" :loading="loading">登 录</el-button>
                 </el-form-item>
             </el-form>
 
