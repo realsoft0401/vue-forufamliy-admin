@@ -54,11 +54,12 @@
 
         <IndexNavs />
 
-        <el-row :gutter="20">
+        <el-row :gutter="20" class="mt-5">
           <el-col :span="12"><IndexChart /></el-col>
-          <el-col :span="12"></el-col>
+          <el-col :span="12"><IndexCard title="店铺及商品提示" tip="店铺及商品提示" :btns="goods"/>
+            <IndexCard title="店铺及商品提示" tip="店铺及商品提示" :btns="order"/></el-col>
         </el-row>
-
+        
     </div>
 </template>
 
@@ -67,11 +68,21 @@ import { ref } from 'vue'
 // import CountTo from '~/components/CountTo.vue'
 import IndexNavs from '~/components/IndexNavs.vue'
 import IndexChart from '~/components/IndexChart.vue'
-import{ getStatisticsDB } from '~/api/dashboard/index.js'
+import IndexCard from '~/components/IndexCard.vue'
+import{ getStatisticsDB, getStatisticsShop } from '~/api/dashboard/index.js'
 
     const panels = ref([])
     getStatisticsDB().then(res=>{
         panels.value = res.panels
-        console.log(panels.value);
+        // console.log(panels.value);
     })
+    
+    const goods = ref([])
+    const order = ref([])
+    getStatisticsShop().then(res=>{
+        goods.value=res.goods
+        order.value=res.order
+    })
+
+
 </script>

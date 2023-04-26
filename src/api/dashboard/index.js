@@ -10,3 +10,8 @@ export  function getStatisticsLine(type){
     const result =  axios.get('/admin/statistics3?type=' + type)
     return result
 }
+
+export  function getStatisticsShop(){
+    const result =  axios.get('/admin/statistics2')
+    return result
+}

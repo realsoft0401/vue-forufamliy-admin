@@ -9,12 +9,17 @@
                     </el-check-tag>
                 </div>
             </div>
-        </template>
+        </template>  
+        <div ref="el" id="chart" style="width: 100%;height: 300px;">
+        </div>
     </el-card>
 </template>
 
 <script setup>
-    import { ref } from "vue"
+    import { ref,onMounted, onBeforeUnmount} from "vue"
+    import * as echarts from 'echarts';
+    import { getStatisticsLine } from "~/api/dashboard/index.js"
+    import { useResizeObserver } from '@vueuse/core'
     const current =  ref("week")
     const options = [{
     text: "近1个月",
@@ -27,7 +32,54 @@
         value: "hour"
     }]
 
-const handChoose=(type)=>{
+    const handChoose=(type)=>{
     current.value =  type
+    getData()
+    }
+
+    var myChart = null
+    onMounted(()=>{
+        var chartDom = document.getElementById('chart');
+        if(chartDom){
+            myChart = echarts.init(chartDom);
+            getData()
+        }
+    })
+
+    onBeforeUnmount(()=>{
+        if(myChart) echarts.dispose(myChart)
+    })
+
+    function getData() {
+    let option = {
+        xAxis: {
+            type: 'category',
+            data: []
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                data: [],
+                type: 'bar',
+                showBackground: true,
+                backgroundStyle: {
+                    color: 'rgba(180, 180, 180, 0.2)'
+                }
+            }
+        ]
+    };
+    myChart.showLoading()
+    getStatisticsLine(current.value).then(res=>{
+        option.xAxis.data = res.x
+        option.series[0].data = res.y
+        myChart.setOption(option)
+    }).finally(()=>{
+        myChart.hideLoading()
+    })
 }
+
+const el = ref(null)
+useResizeObserver(el, (entries) => myChart.resize())
 </script>
