@@ -81,5 +81,7 @@
 }
 
 const el = ref(null)
-useResizeObserver(el, (entries) => myChart.resize())
+if(myChart){
+    useResizeObserver(el, (entries) => myChart.resize())
+}
 </script>

@@ -25,5 +25,9 @@ import './utils/permission'
 
 import "nprogress/nprogress.css"
 
+//全局性指令别名
+import directives from './utils/directives'
+//全局性指令
+app.use(directives)
 
 app.mount('#app')
