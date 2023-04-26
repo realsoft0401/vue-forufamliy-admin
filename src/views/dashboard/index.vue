@@ -1,6 +1,33 @@
 <template>
     <div>
         <el-row :gutter="20">
+            <template v-if="panels.length == 0">
+                <el-col :span="6" v-for="i in 4" :key="i">
+                    <el-skeleton style="width: 100%;" animated loading>
+                        <template #template>
+                            <!--卡片代码-->
+                            <el-card shadow="hover" class="border-0">
+                                <template #header>
+                                    <div class="flex justify-between">
+                                        <el-skeleton-item variant="text" style="width: 50%" />
+                                        <el-skeleton-item variant="text" style="width: 10%" />
+                                    </div>
+                                </template>
+                                    <el-skeleton-item variant="h3" style="width: 80%" />
+                                <el-divider />
+                                <div class="flex justify-between text-sm text-gray-500">
+                                    <el-skeleton-item variant="text" style="width: 50%" />
+                                    <el-skeleton-item variant="text" style="width: 10%" />
+                                </div>
+                            </el-card>
+                            <!--卡片代码-->
+                            <!--骨架屏代码-->
+                            <el-skeleton-item variant="text" style="width: 30%" />
+                        </template>
+                      </el-skeleton>
+                </el-col>
+            </template>
+
             <el-col :span="6" :offset="0" v-for="(item, index) in panels" :key="index">
                 <el-card shadow="hover" class="border-0">
                     <template #header>
@@ -13,6 +40,7 @@
                     </template>
                     <span class="text-3xl font-bold text-gray-500">
                         {{ item.value }}
+                        <!--<CountTo :value='item.value' />-->
                     </span>
                     <el-divider />
                     <div class="flex justify-between text-sm text-gray-500">
@@ -23,11 +51,15 @@
 
             </el-col>
         </el-row>
+
+        <IndexNavs />
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
+// import CountTo from '~/components/CountTo.vue'
+import IndexNavs from '~/components/IndexNavs.vue'
 import{ getStatisticsDB } from '~/api/dashboard/index.js'
 
     const panels = ref([])
