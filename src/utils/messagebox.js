@@ -11,3 +11,11 @@ export function showMessageBox(title="", content="提示内容", type="warning")
         }
       )
 }
+
+export function showPrompt(tip,value = ''){
+  return   ElMessageBox.prompt(tip, '请输入', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    inputValue:value
+  })
+}
