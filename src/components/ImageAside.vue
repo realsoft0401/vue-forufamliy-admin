@@ -82,7 +82,6 @@ const handleSubmit = () => {
         const fun =  editId.value ? editImageClass(editId.value,form): createImageClass(form)
         formDrawerRef.value.showLoading()
         fun.then(res => {
-            console.log(res);
             if (res) {
                 notification(drawerTitle.value, "上传图片成功", "success")
                 getImageData(editId.value ? currentPage.value : 1 )

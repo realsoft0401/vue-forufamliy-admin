@@ -21,7 +21,7 @@ export  function delImageClass(id){
 }
 
 export  function getImageList(id, page){
-    const result =  axios.get('/admin/image_class/'+ id +'/image/'+ page +'?limit=10')
+    const result =  axios.get('/admin/image_class/'+ id +'/image/'+ page +'?limit=12')
     return result
 }
 
