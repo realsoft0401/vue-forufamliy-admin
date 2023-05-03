@@ -5,7 +5,7 @@
         <div class="flex items-center justify-between mb -4">
             <el-button type="primary" size="small" @click="handleCreate">新增</el-button>
             <el-tooltip content="刷新数据" placement="top">
-                <el-button @click="getNoticeData">
+                <el-button @click="getManagerData">
                     <el-icon size="20"><Refresh /></el-icon>
                 </el-button>
             </el-tooltip>
@@ -13,8 +13,14 @@
         <div class="top p-3" >
             <el-table :data="tableData" stripe style="width: 100%" v-loading="loading">
             <el-table-column prop="id" label="ID" />
-              <el-table-column prop="title" label="标题" />
-              <el-table-column prop="content" label="内容" width="380" />
+              <el-table-column prop="username" label="管理员">
+                <template #default="{row}">
+                    <div class="flex items-center">
+                        <el-avatar :size="50" :src='row.avatar != "" ? row.avatar : "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"' />
+                    </div>
+                </template>
+              </el-table-column>
+              <el-table-column prop="status" label="状态" width="380" />
               <el-table-column prop="create_time" label="创建时间" width="180" />
               <el-table-column  label="操作" width="180" align="center">
                 <template #default="scope">
@@ -37,7 +43,7 @@
                 :total="total" 
                 :current-page="currentPage" 
                 :page-size="limit" 
-                @current-change="getNoticeData"/>
+                @current-change="getManagerData"/>
             </div>
 
             <FormDrawer :title="drawerTitle" ref="formDrawerRef" @submit="handleSubmit">
@@ -55,7 +61,7 @@
 
 <script setup>
 import { reactive, ref, computed } from "vue"
-import { getNoticeList, createNoticeData, delNoticeData, editNoticeData } from "~/api/notice"
+import { getMaragerList } from "~/api/manager"
 import FormDrawer from '~/components/FormDrawer.vue'
 import { notification } from '~/utils/notification.js'
 
@@ -66,13 +72,17 @@ const limit = ref(10)
 
 const loading = ref(false)
 
-function getNoticeData(p = null){
+function getManagerData(p = null){
     if(typeof p == "number"){
         currentPage.value = p
     }
+    const query = {
+        limit: 10,
+        keyword: null
+    }
     loading.value = true
-    getNoticeList(currentPage.value).then((res)=>{
-        //console.log(res)
+    getMaragerList(currentPage.value,  query).then((res)=>{
+        console.log(res)
         total.value = res.totalCount
         tableData.value = res.list
     }).finally(()=>{
@@ -80,7 +90,7 @@ function getNoticeData(p = null){
     })
 }
 
-getNoticeData()
+getManagerData()
 
 //表单部分
 const formDrawerRef = ref(null)
@@ -117,7 +127,7 @@ const handleSubmit = () =>{
         fun.then(res=>{
             if(res){
                 notification("添加成功", "公告添加成功", "success")
-                getNoticeData(currentPage.value)
+                getManagerData(currentPage.value)
                 formDrawerRef.value.close()
             }else{
                 notification("添加失败", "公告添加失败", "error")
@@ -142,7 +152,7 @@ const handleDelete = (id)=>{
     delNoticeData(id).then(res =>{
         if(res){
                 notification("删除成功", "公告删除成功", "success")
-                getNoticeData(currentPage.value)
+                getManagerData(currentPage.value)
                 formDrawerRef.value.close()
             }else{
                 notification("删除失败", "公告删除失败", "error")

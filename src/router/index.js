@@ -13,6 +13,7 @@ import ImageList from '~/views/image/list.vue'
 import NoticeList from '~/views/notice/list.vue'
 import SettingBase from '~/views/setting/base.vue'
 import CouponList from '~/views/coupon/list.vue'
+import ManagerList from '~/views/manager/list.vue'
 
 //默认路由单独页面
 const routes = [
@@ -93,6 +94,13 @@ const routes = [
       component: CouponList,
       meta: {
         title: '优惠券列表'
+      }
+    },{
+      path: '/manager/list',
+      name: '/manager/list',
+      component: ManagerList,
+      meta: {
+        title: '管理员列表'
       }
     }
   ]
