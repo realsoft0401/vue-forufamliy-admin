@@ -7,7 +7,7 @@
           <div class="actions">
             <el-form-item>
                 <el-button type="primary" @click="submit"  :loading="loading">{{ confirmText }}</el-button>
-                <el-button type="primary" @click="close">取消</el-button>
+                <el-button @click="close">取消</el-button>
             </el-form-item>
           </div>
         </div>

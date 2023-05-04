@@ -143,7 +143,7 @@ const checkedImage = computed(()=> list.value.filter(o=>o.checked))
 const handleChooseChange = (item)=>{
   if(item.checked && checkedImage.value.length > props.limit){
     item.checked = false
-    return toast(`最多只能选中${props.limit}张`,"error")
+    return notification('提示',`最多只能选中${props.limit}张`,"error")
   }
   emit("choose",checkedImage.value)
 }
