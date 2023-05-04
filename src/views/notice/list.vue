@@ -116,11 +116,11 @@ const handleSubmit = () =>{
         formDrawerRef.value.showLoading()
         fun.then(res=>{
             if(res){
-                notification("添加成功", "公告添加成功", "success")
+                notification(drawerTitle.value + "成功", drawerTitle.value + "成功", "success")
                 getNoticeData(currentPage.value)
                 formDrawerRef.value.close()
             }else{
-                notification("添加失败", "公告添加失败", "error")
+                notification(drawerTitle.value + "失败", drawerTitle.value + "失败", "error")
                 formDrawerRef.value.close()
             }
         }).finally(()=>{
