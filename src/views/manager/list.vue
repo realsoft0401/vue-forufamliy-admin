@@ -181,7 +181,6 @@ const handleSubmit = () =>{
         if (!valid) {
             return
         }
-        console.log(managerId.value);
         const fun =  managerId.value ? editManager(managerId.value, form):addManager(form)
         formDrawerRef.value.showLoading()
         fun.then(res=>{

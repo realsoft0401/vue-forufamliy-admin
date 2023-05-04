@@ -11,7 +11,6 @@ export function useRepassword() {
     const router = useRouter()
     const store = useStore()
 
-    console.log(store.state);
     //注册窗体drawer组件，修改密码部分
     const FormDrawerRef = ref(null)
 

@@ -111,7 +111,6 @@ const handleSubmit = () =>{
         if (!valid) {
             return
         }
-        console.log(noticeId.value);
         const fun =  noticeId.value ? editNoticeData(noticeId.value, form):createNoticeData(form)
         formDrawerRef.value.showLoading()
         fun.then(res=>{
