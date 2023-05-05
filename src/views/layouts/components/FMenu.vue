@@ -26,7 +26,7 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute, useRouter, onBeforeRouteUpdate } from 'vue-router';
 import { useStore} from 'vuex';
 
 const store = useStore()
@@ -46,6 +46,11 @@ const isCollapse = computed(()=>!(store.state.asideWith == '250px'))
 
 //默认选中
 const defaultActive = ref(route.path)
+
+//监听路由变化
+onBeforeRouteUpdate((to, from )=>{
+  defaultActive.value = to.path
+})
 
 </script>
 <style>

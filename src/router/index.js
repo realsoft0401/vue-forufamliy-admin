@@ -14,6 +14,7 @@ import NoticeList from '~/views/notice/list.vue'
 import SettingBase from '~/views/setting/base.vue'
 import CouponList from '~/views/coupon/list.vue'
 import ManagerList from '~/views/manager/list.vue'
+import AccessList from '~/views/access/list.vue'
 
 //默认路由单独页面
 const routes = [
@@ -101,6 +102,13 @@ const routes = [
       component: ManagerList,
       meta: {
         title: '管理员列表'
+      }
+    },{
+      path: '/access/list',
+      name: '/access/list',
+      component: AccessList,
+      meta: {
+        title: '菜单权限管理'
       }
     }
   ]

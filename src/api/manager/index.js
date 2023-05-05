@@ -1,6 +1,6 @@
 import axios from "~/utils/axios"
 
-export  function getMaragerList(page, query = {
+export  function getManagerList(page, query = {
     limit: 10,
     keyword: null
  } ){
@@ -13,22 +13,22 @@ export  function getMaragerList(page, query = {
     return result
 }
 
-export function delManagerData(id){
+export function deleteManager(id){
      const result = axios.post(`/admin/manager/${id}/delete`)
      return result
 }
 
-export function editManagerStatus(id, status){
+export function updateManagerStatus(id, status){
      const result = axios.post(`/admin/manager/${id}/update_status`,{ status })
      return result
 }
 
-export function addManager(data){
+export function createManager(data){
      const result = axios.post(`/admin/manager`, data)
      return result
 }
 
-export function editManager(id, data){
+export function updateManager(id, data){
      const result = axios.post(`/admin/manager/${id}`, data)
      return result
 }
