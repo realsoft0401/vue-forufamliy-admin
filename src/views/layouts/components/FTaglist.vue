@@ -12,7 +12,7 @@
         :key="item.path"
         :label="item.title"
         :name="item.path"
-        :closable="item.path !='/dashboard/'"
+        :closable="item.path !='/dashboard/index'"
       >
       </el-tab-pane>
     </el-tabs>

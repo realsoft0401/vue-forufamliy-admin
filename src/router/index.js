@@ -15,6 +15,7 @@ import SettingBase from '~/views/setting/base.vue'
 import CouponList from '~/views/coupon/list.vue'
 import ManagerList from '~/views/manager/list.vue'
 import AccessList from '~/views/access/list.vue'
+import RoleList from '~/views/role/list.vue'
 
 //默认路由单独页面
 const routes = [
@@ -27,8 +28,8 @@ const routes = [
 //动态路由数组 框架内页面
   const asyncRoutes = [
     { 
-      path: '/dashboard/',
-      name: '/dashboard/',
+      path: '/dashboard/index',
+      name: '/dashboard/index',
       component: DashBoard,
       meta: {
         title: '系统首页'
@@ -109,6 +110,13 @@ const routes = [
       component: AccessList,
       meta: {
         title: '菜单权限管理'
+      }
+    },{
+      path: '/role/list',
+      name: '/role/list',
+      component: RoleList,
+      meta: {
+        title: '角色管理列表'
       }
     }
   ]

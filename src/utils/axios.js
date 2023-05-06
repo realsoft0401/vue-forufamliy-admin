@@ -33,7 +33,7 @@ service.interceptors.response.use(function (response) {
 
   const msg = error.response.data.msg || "服务器请求失败"
 
-  if(msg == "非法token，请先登录！"){
+  if(msg == "非法token,请先登录!"){
     store.dispatch("logout").finally(()=>location.reload())
   }
   notification('错误提示', msg,'error')

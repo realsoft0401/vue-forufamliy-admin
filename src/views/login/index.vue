@@ -77,7 +77,7 @@ const submitForm = () => {
         loading.value = true
         store.dispatch("login",loginForm).then(res=>{
             notification('登陆成功', '用户登陆成功', 'success')
-            router.push("/dashboard/")
+            router.push("/dashboard/index")
         }).finally(()=>{
             loading.value = false
         })

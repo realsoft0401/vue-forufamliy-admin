@@ -12,7 +12,7 @@ export function useTabList() {
     const tabList = ref([
         {
             title: '系统首页',
-            path: "/dashboard/"
+            path: "/dashboard/index"
         }
     ])
 
@@ -68,14 +68,14 @@ export function useTabList() {
 
     const handleClose = (c) => {
         if (c == 'clearAll') {
-            activeTab.value = "/dashboard/"
+            activeTab.value = "/dashboard/index"
             tabList.value = [{
                 title: '系统首页',
-                path: "/dashboard/"
+                path: "/dashboard/index"
             }]
         } else if (c == 'clearOther') {
             //过滤只剩首页 和 选中的tab
-            tabList.value = tabList.value.filter(tab => tab.path == "/dashboard/" || tab.path == activeTab.value)
+            tabList.value = tabList.value.filter(tab => tab.path == "/dashboard/index" || tab.path == activeTab.value)
         }
         cookies.set("tabList", tabList.value)
     }

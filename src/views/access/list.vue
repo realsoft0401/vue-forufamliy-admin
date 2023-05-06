@@ -46,7 +46,7 @@
                 <el-input v-model="form.frontpath" placeholder="前端路由"></el-input>
             </el-form-item>
             <el-form-item label="后端规则" prop="condition" v-if="form.menu == 0">
-                <el-input v-model="form.rule_id" placeholder="后端规则"></el-input>
+                <el-input v-model="form.condition" placeholder="后端规则"></el-input>
             </el-form-item>
             <el-form-item label="请求方式" prop="method" v-if="form.menu == 0">
                 <el-select v-model="form.method" class="m-0" placeholder="请选择请求方式">
