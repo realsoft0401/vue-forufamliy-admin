@@ -39,8 +39,7 @@
                         </div>
                     </template>
                     <span class="text-3xl font-bold text-gray-500">
-                        <!-- {{ item.value }} -->
-                        <CountTo :value='item.value' />
+                        <CountTo :value="item.value" />
                     </span>
                     <el-divider />
                     <div class="flex justify-between text-sm text-gray-500">
