@@ -195,13 +195,20 @@
     }
   })
 
+
   const timerange =computed({
     get(){
         return form.start_time && form.end_time ? [form.start_time, form.end_time] : []
     },
     set(val){
-        form.start_time = val[0]
-        form.end_time = val[1]
+        console.log(val);
+        if(val != null){
+            form.start_time = val[0]
+            form.end_time = val[1]
+        }else{
+            form.start_time = ''
+            form.end_time = ''
+        }
     }
   })
 
