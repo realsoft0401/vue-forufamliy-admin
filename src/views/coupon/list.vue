@@ -201,7 +201,7 @@
         return form.start_time && form.end_time ? [form.start_time, form.end_time] : []
     },
     set(val){
-        console.log(val);
+        //console.log(val);
         if(val != null){
             form.start_time = val[0]
             form.end_time = val[1]
