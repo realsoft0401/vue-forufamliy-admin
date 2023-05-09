@@ -16,6 +16,7 @@ import CouponList from '~/views/coupon/list.vue'
 import ManagerList from '~/views/manager/list.vue'
 import AccessList from '~/views/access/list.vue'
 import RoleList from '~/views/role/list.vue'
+import SkusList from '~/views/skus/list.vue'
 
 //默认路由单独页面
 const routes = [
@@ -117,6 +118,13 @@ const routes = [
       component: RoleList,
       meta: {
         title: '角色管理列表'
+      }
+    },{
+      path: '/skus/list',
+      name: '/skus/list',
+      component: SkusList,
+      meta: {
+        title: '规格管理列表'
       }
     }
   ]

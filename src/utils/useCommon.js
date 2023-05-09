@@ -190,6 +190,30 @@ export function useInitForm(opt = {}) {
         formDrawerRef.value.open()
     }
 
+
+    const multiSelectionIds =  ref([])
+    const handleSelectionChange =(e) =>{
+      // console.log(e)
+      multiSelectionIds.value = e.map(o=>o.id)
+    }
+  
+    const multipleTableRef = ref(null)
+    const handleMultiDelete = () =>{
+      loading.value = true
+      opt.delete(multiSelectionIds.value).then((res)=>{
+          notification("删除成功")
+          //清空选中
+          if(multiSelectionIds.value){
+              multiSelectionIds.value.clearSelection()
+          }
+          getData()
+      }).finally(()=>{
+          loading.value = false
+      })
+  
+    }
+
+
     return {
         formDrawerRef,
         formRef,
@@ -200,6 +224,9 @@ export function useInitForm(opt = {}) {
         handleSubmit,
         resetForm,
         handleCreate,
-        handleEdit
+        handleEdit,
+        handleSelectionChange,
+        handleMultiDelete,
+        multipleTableRef
     }
 }
