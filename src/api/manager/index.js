@@ -1,17 +1,11 @@
 import axios from "~/utils/axios"
+import { queryParams } from "~/utils/queryParams.js"
 
-export  function getManagerList(page, query = {
-    limit: 10,
-    keyword: null
- } ){
-    let result
-    if (query.keyword == null) {
-         result = axios.get(`/admin/manager/${page}?limit=${query.limit}`)
-    }else{
-         result = axios.get(`/admin/manager/${page}?limit=${query.limit}&keyword=${encodeURIComponent(query.keyword)}`)
-    }
-    return result
-}
+export function getManagerList(page,query = {}){
+     let r = queryParams(query)
+     return axios.get(`/admin/manager/${page}${r}`)
+ }
+ 
 
 export function deleteManager(id){
      const result = axios.post(`/admin/manager/${id}/delete`)
